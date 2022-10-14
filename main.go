@@ -8,6 +8,7 @@ import (
 // init function \ run before main
 func init() {
 	initializers.LoadEnvVariables()
+	initializers.ConnectToDb()
 }
 
 // main function
