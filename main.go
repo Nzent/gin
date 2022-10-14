@@ -18,5 +18,6 @@ func main() {
 	r.POST("/posts", controllers.CreatePost)
 	r.GET("/posts", controllers.GetAllPosts)
 	r.GET("/post/:id", controllers.GetSinglePosts)
+	r.PUT("/post/:id", controllers.UpdatePost)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
