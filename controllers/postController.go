@@ -9,9 +9,15 @@ import (
 func PostCreate(c *gin.Context) {
 
 	// get data from req body
+	var body struct {
+		ID uint
+		Title string
+		Body  string
+	}
 
+	c.Bind(&body)
 	// create a post
-	post := models.Post{Title: "First title", Body: "First body"}
+	post := models.Post{ Title: body.Title, Body: body.Body}
 
 	result := initializers.DB.Create(&post)
 
@@ -21,6 +27,6 @@ func PostCreate(c *gin.Context) {
 	}
 	// return post
 	c.JSON(200, gin.H{
-		"post": post,
+		"post": post.ID,
 	})
 }
