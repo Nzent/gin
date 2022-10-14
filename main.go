@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/nzent/gin/controllers"
 	"github.com/nzent/gin/initializers"
 )
 
@@ -14,10 +15,6 @@ func init() {
 // main function
 func main() {
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/posts", controllers.PostCreate)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
