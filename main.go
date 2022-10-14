@@ -1,7 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/nzent/gin/initializers"
+)
 
-func main()  {
-	fmt.Println("Init 02")
+// init function \ run before main
+func init() {
+	initializers.LoadEnvVariables()
+}
+
+// main function
+func main() {
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
 }
