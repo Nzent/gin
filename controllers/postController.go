@@ -6,18 +6,19 @@ import (
 	"github.com/nzent/gin/models"
 )
 
-func PostCreate(c *gin.Context) {
+// Create post
+func CreatePost(c *gin.Context) {
 
 	// get data from req body
 	var body struct {
-		ID uint
+		ID    uint
 		Title string
 		Body  string
 	}
 
 	c.Bind(&body)
 	// create a post
-	post := models.Post{ Title: body.Title, Body: body.Body}
+	post := models.Post{Title: body.Title, Body: body.Body}
 
 	result := initializers.DB.Create(&post)
 
@@ -28,5 +29,18 @@ func PostCreate(c *gin.Context) {
 	// return post
 	c.JSON(200, gin.H{
 		"post": post.ID,
+	})
+}
+
+// Get posts
+func GetPosts(c *gin.Context) {
+	// get posts
+	var posts []models.Post
+	initializers.DB.Find(&posts)
+	// respond with them
+	// return post
+
+	c.JSON(200, gin.H{
+		"post": posts,
 	})
 }
